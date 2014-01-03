@@ -21,6 +21,17 @@ public class EvalVisitor extends apronBaseVisitor <Boolean>{
         }
         return true;
     }
+    public Boolean visitFilter_expr__expr_and_term(apronParser.Filter_expr__expr_and_termContext ctx){
+        Boolean ret0 = visit(ctx.filter_expr());
+        Boolean ret1 = visit(ctx.filter_term());
+        return ret0&&ret1;
+    }
+    public Boolean visitFilter_term__term_or_factor(apronParser.Filter_term__term_or_factorContext ctx){
+        Boolean ret0 = visit(ctx.filter_term());
+        Boolean ret1 = visit(ctx.filter_factor());
+        return ret0||ret1;
+    }
+
     /*
     boolean visitIp_range(apronParser.Ip_rangeContext ctx){
     }
