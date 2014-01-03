@@ -16,6 +16,7 @@ run:compile
 compile:generate
 	javac *.java
 generate:
+	export CLASSPATH=".:/usr/local/lib/antlr-4.0-complete.jar:$(CLASSPATH)"
 	$(antlr4) -visitor $(Program).g4
 clean:
 	rm -f *Lexer.java *Parser.java *Listener.java *.class *.tokens

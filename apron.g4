@@ -24,19 +24,19 @@ filter_factor:
     |NOT filter_factor                      #filter_factor__NOT
     ;
 filter_not_factor:
-    '(' filter_expr ')'
-    |flow_predicate
-    |topo
-    |ACTION action
-    |ownership
-    |max_priority
-    |flow_table
-    |notification
-    |statistics
+    '(' filter_expr ')'                     #filter_expr_
+    |flow_predicate                         #flow_predicate_
+    |topo                                   #topo_
+    |ACTION action                          #action_
+    |ownership                              #ownership_
+    |max_priority                           #max_priority_
+    |flow_table                             #flow_table_
+    |notification                           #notification_
+    |statistics                             #statistics_
     ;    
 flow_predicate:
-              ip_range
-              |field '{' value_list'}'
+              ip_range                      #ip_range_
+              |field '{' value_list'}'      #field_
               ;
 field:
      TCP_SRC
@@ -46,22 +46,22 @@ field:
      |IP_DST
      ;
 value_list:
-          value_range 
-          |value_range ',' value_list
+          value_range                       #value_list__s
+          |value_range ',' value_list       #value_list__w
           ;
 value_range:
-           INT
-           |INT '-' INT
+           INT                              #value_range_s
+           |INT '-' INT                     #value_range_w
            ;
 ip_range:
-        IP ip_format WITH MASK ip_format
+        IP ip_format WITH MASK ip_format    
         ;
 ip_format:
          IP_FORMAT
          ;
 topo:
-    physical_topo
-    |virtual_topo
+    physical_topo                           #physical_topo_
+    |virtual_topo                           #virtual_topo_
     ;
 physical_topo:
              SWITCH switch_set AND LINK link_set
