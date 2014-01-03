@@ -26,10 +26,13 @@ Runing
 =============================================================================
 
 1)permission description should be writen in sample.txt
+
 2)make
 This will test the syntax and generate a syntax tree in LISP-like style.
+
 3)make gui
 This will test the syntax and generate a syntax tree in GTK.
+
 4)make test
 This will test the syntax and generate a syntax tree. Then run the Test to go through the tree with a simple api call check.
 
