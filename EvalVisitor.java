@@ -27,10 +27,32 @@ public class EvalVisitor extends apronBaseVisitor <Boolean>{
         return ret0&&ret1;
     }
     public Boolean visitFilter_term__term_or_factor(apronParser.Filter_term__term_or_factorContext ctx){
+        //Todo: visit another leaf
         Boolean ret0 = visit(ctx.filter_term());
-        Boolean ret1 = visit(ctx.filter_factor());
+        Boolean ret1 = true;//visit(ctx.filter_factor());
         return ret0||ret1;
     }
+//filter_factor
+    public Boolean visitFilter_factor__not_factor(apronParser.Filter_factor__not_factorContext ctx){
+        Boolean ret0 = visit(ctx.filter_not_factor());
+        return ret0;
+    }
+    public Boolean visitFilter_factor__NOT(apronParser.Filter_factor__NOTContext ctx){
+        Boolean ret0 = visit(ctx.filter_factor());
+        return !ret0;
+    }
+//filter_not_factor
+    public Boolean visitFlow_predicate_(apronParser.Flow_predicate_Context ctx){
+        Boolean ret0 = visit(ctx.flow_predicate());
+        return ret0;
+    }
+//flow_predicate
+    public Boolean visitIp_range_(apronParser.Ip_range_Context ctx){
+        //Boolean ret0 = visit(ctx.flow_predicate());
+        //Todo: compare IP ip_format WITH MASK ip_format with ACLRequest
+        return true;
+    }
+
 
     /*
     boolean visitIp_range(apronParser.Ip_rangeContext ctx){

@@ -67,33 +67,33 @@ physical_topo:
              SWITCH switch_set AND LINK link_set
              ;
 switch_set:
-          ALL_SWITCHES
-          |BORDER_SWITCHES
-          |'{' sw_idx_list '}'
+          ALL_SWITCHES                      #all_switches_
+          |BORDER_SWITCHES                  #border_switches_
+          |'{' sw_idx_list '}'              #sw_idx_list_
           ;
 sw_idx_list:
-           sw_idx
-           |sw_idx ',' sw_idx_list
+           sw_idx                           #sw_idx_list__wo
+           |sw_idx ',' sw_idx_list          #sw_idx_list__w
            ;
 sw_idx:
       INT
       ;
 link_set:
-        ALL_DIRECT_LINKS
-        |ALL_PATHS_AS_LINKS
-        |link_list
+        ALL_DIRECT_LINKS                    #all_driect_links_
+        |ALL_PATHS_AS_LINKS                 #all_paths_as_links_
+        |link_list                          #link_list_
         ;
 link_list:
-         link
-         |link ',' link_list
+         link                               #link_list__wo
+         |link ',' link_list                #link_list__w
          ;
 link:
-    link_idx
-    |'(' path ')'
+    link_idx                                #link__wo
+    |'(' path ')'                           #link__w
     ;
 path:
-    link_idx
-    |link_idx ':' path
+    link_idx                                #path__wo
+    |link_idx ':' path                      #path__w
     ;
 link_idx:
         INT
@@ -102,43 +102,43 @@ virtual_topo:
             VIRTUAL SWITCH switch_mapping AND LINK link_set
             ;
 switch_mapping:
-              SINGLE_BIG_SWITCH
-              |'{' virtual_switch_set '}'
+              SINGLE_BIG_SWITCH             #single_big_switch_
+              |'{' virtual_switch_set '}'   #virtual_switch_set_
               ;
 virtual_switch_set:
-          switch_set AS sw_idx
-          |switch_set AS sw_idx ',' virtual_switch_set
+          switch_set AS sw_idx              #virtual_switch_set__wo
+          |switch_set AS sw_idx ',' virtual_switch_set  #virtual_switch_set__w
           ;
 action:
-      DROP
-      |FORWARD
-      |MODIFY
-      |MODIFY FIELD field_list
+      DROP                                  #drop_
+      |FORWARD                              #forward_
+      |MODIFY                               #modify_
+      |MODIFY FIELD field_list              #modify_field_
       ;
 field_list:
-          field
-          |field ',' field_list
+          field                             #filed__wo
+          |field ',' field_list             #field__w
           ;    
 ownership:
-         OWN_FLOWS
-         |OTHERS_FLOWS
-         |ALL_FLOWS
+         OWN_FLOWS                          #own_flows_
+         |OTHERS_FLOWS                      #others_flows_
+         |ALL_FLOWS                         #all_flows_
          ;
 max_priority:
             MAX_PRIORITY INT
             ;
 flow_table:
-    RULE_COUNT_PER_SWITCH INT
-    |SIZE_PERCENTAGE_PER_SWITCH FLOAT
+    RULE_COUNT_PER_SWITCH INT               #flow_table__1
+    |SIZE_PERCENTAGE_PER_SWITCH FLOAT       #flow_table_2
     ;
 notification:
-            EVENT_INTERCEPTION
-            |MODIFY_EVENT_ORDER
+            EVENT_INTERCEPTION              #event_interception_
+            |MODIFY_EVENT_ORDER             #modify_event_order_
             ;
 statistics:
-          FLOW_LEVEL
-          |PORT_LEVEL
-          |SWITCH_LEVEL
+          FLOW_LEVEL                        #flow_level_
+          |PORT_LEVEL                       #port_level_
+          |SWITCH_LEVEL                     #switch_level_
           ;
 perm_name:
          STRING
