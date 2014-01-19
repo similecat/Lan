@@ -63,9 +63,6 @@ public interface constraintListener extends ParseTreeListener {
 	void enterFilter_expr__term(constraintParser.Filter_expr__termContext ctx);
 	void exitFilter_expr__term(constraintParser.Filter_expr__termContext ctx);
 
-	void enterEmpty(constraintParser.EmptyContext ctx);
-	void exitEmpty(constraintParser.EmptyContext ctx);
-
 	void enterPerm_expr__wo(constraintParser.Perm_expr__woContext ctx);
 	void exitPerm_expr__wo(constraintParser.Perm_expr__woContext ctx);
 
@@ -81,9 +78,6 @@ public interface constraintListener extends ParseTreeListener {
 	void enterLink__wo(constraintParser.Link__woContext ctx);
 	void exitLink__wo(constraintParser.Link__woContext ctx);
 
-	void enterBind_(constraintParser.Bind_Context ctx);
-	void exitBind_(constraintParser.Bind_Context ctx);
-
 	void enterLink__w(constraintParser.Link__wContext ctx);
 	void exitLink__w(constraintParser.Link__wContext ctx);
 
@@ -96,14 +90,14 @@ public interface constraintListener extends ParseTreeListener {
 	void enterAssert_and(constraintParser.Assert_andContext ctx);
 	void exitAssert_and(constraintParser.Assert_andContext ctx);
 
-	void enterAssert_list_(constraintParser.Assert_list_Context ctx);
-	void exitAssert_list_(constraintParser.Assert_list_Context ctx);
-
 	void enterVar_perm(constraintParser.Var_permContext ctx);
 	void exitVar_perm(constraintParser.Var_permContext ctx);
 
 	void enterPath__wo(constraintParser.Path__woContext ctx);
 	void exitPath__wo(constraintParser.Path__woContext ctx);
+
+	void enterProgram(constraintParser.ProgramContext ctx);
+	void exitProgram(constraintParser.ProgramContext ctx);
 
 	void enterFlow_predicate_(constraintParser.Flow_predicate_Context ctx);
 	void exitFlow_predicate_(constraintParser.Flow_predicate_Context ctx);
@@ -222,11 +216,11 @@ public interface constraintListener extends ParseTreeListener {
 	void enterSw_idx(constraintParser.Sw_idxContext ctx);
 	void exitSw_idx(constraintParser.Sw_idxContext ctx);
 
-	void enterIp_format(constraintParser.Ip_formatContext ctx);
-	void exitIp_format(constraintParser.Ip_formatContext ctx);
-
 	void enterMax_priority_(constraintParser.Max_priority_Context ctx);
 	void exitMax_priority_(constraintParser.Max_priority_Context ctx);
+
+	void enterIp_format(constraintParser.Ip_formatContext ctx);
+	void exitIp_format(constraintParser.Ip_formatContext ctx);
 
 	void enterTopo_(constraintParser.Topo_Context ctx);
 	void exitTopo_(constraintParser.Topo_Context ctx);
@@ -251,6 +245,9 @@ public interface constraintListener extends ParseTreeListener {
 
 	void enterSw_idx_list__w(constraintParser.Sw_idx_list__wContext ctx);
 	void exitSw_idx_list__w(constraintParser.Sw_idx_list__wContext ctx);
+
+	void enterStat(constraintParser.StatContext ctx);
+	void exitStat(constraintParser.StatContext ctx);
 
 	void enterOthers_flows_(constraintParser.Others_flows_Context ctx);
 	void exitOthers_flows_(constraintParser.Others_flows_Context ctx);

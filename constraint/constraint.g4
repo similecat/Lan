@@ -1,9 +1,11 @@
 grammar constraint;
 import Token;
 program:
-        binding program 						#bind_
-        |assert_list program 					#assert_list_
-        |';'                                    #empty
+        stat*
+        ;
+stat:
+        binding
+        |assert_list
         ;
 binding:
         LET var_perm '=' '{' perm_list '}'  	#bind_list

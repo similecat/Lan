@@ -4,4 +4,4 @@ LET monitorPerms = {
     PERM network_access LIMITING IP 192.168.0.0 WITH MASK 255.255.0.0
 }
 ASSERT this = monitorPerms
-;
+
