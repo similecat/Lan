@@ -53,6 +53,8 @@ public interface constraintVisitor<T> extends ParseTreeVisitor<T> {
 
 	T visitLink__wo(constraintParser.Link__woContext ctx);
 
+	T visitBind_(constraintParser.Bind_Context ctx);
+
 	T visitLink__w(constraintParser.Link__wContext ctx);
 
 	T visitCmp_operator(constraintParser.Cmp_operatorContext ctx);
@@ -60,6 +62,8 @@ public interface constraintVisitor<T> extends ParseTreeVisitor<T> {
 	T visitPath__w(constraintParser.Path__wContext ctx);
 
 	T visitAssert_and(constraintParser.Assert_andContext ctx);
+
+	T visitAssert_list_(constraintParser.Assert_list_Context ctx);
 
 	T visitVar_perm(constraintParser.Var_permContext ctx);
 
@@ -145,9 +149,9 @@ public interface constraintVisitor<T> extends ParseTreeVisitor<T> {
 
 	T visitSw_idx(constraintParser.Sw_idxContext ctx);
 
-	T visitMax_priority_(constraintParser.Max_priority_Context ctx);
-
 	T visitIp_format(constraintParser.Ip_formatContext ctx);
+
+	T visitMax_priority_(constraintParser.Max_priority_Context ctx);
 
 	T visitTopo_(constraintParser.Topo_Context ctx);
 
@@ -164,8 +168,6 @@ public interface constraintVisitor<T> extends ParseTreeVisitor<T> {
 	T visitAction_(constraintParser.Action_Context ctx);
 
 	T visitSw_idx_list__w(constraintParser.Sw_idx_list__wContext ctx);
-
-	T visitStat(constraintParser.StatContext ctx);
 
 	T visitOthers_flows_(constraintParser.Others_flows_Context ctx);
 

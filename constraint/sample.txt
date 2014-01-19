@@ -1,7 +1,6 @@
-LET monitorPerms = {
-    PERM read_topology
-    PERM read_statistics LIMITING PORT_LEVEL OR SWITCH_LEVEL
-    PERM network_access LIMITING IP 192.168.0.0 WITH MASK 255.255.0.0
+LET monitorPerms = { 
+PERM read_topology
+PERM read_statistics LIMITING PORT_LEVEL OR SWITCH_LEVEL
+PERM network_access LIMITING IP 192.168.0.0 WITH MASK 255.255.0.0
 }
 ASSERT this = monitorPerms
-

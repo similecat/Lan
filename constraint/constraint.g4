@@ -4,11 +4,11 @@ program:
         stat*
         ;
 stat:
-        binding
-        |assert_list
+        binding                                 #bind_
+        |assert_list                            #assert_list_
         ;
 binding:
-        LET var_perm '=' '{' perm_list '}'  	#bind_list
+        LET var_perm '=' '{' perm_list '}'      #bind_list
         |LET var_perm '=' APP app_name		    #bind_app
         |LET var_perm '=' perm_expr 			#bind_expr
         ;

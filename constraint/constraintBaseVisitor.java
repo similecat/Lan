@@ -54,6 +54,8 @@ public class constraintBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 
 	@Override public T visitLink__wo(constraintParser.Link__woContext ctx) { return visitChildren(ctx); }
 
+	@Override public T visitBind_(constraintParser.Bind_Context ctx) { return visitChildren(ctx); }
+
 	@Override public T visitLink__w(constraintParser.Link__wContext ctx) { return visitChildren(ctx); }
 
 	@Override public T visitCmp_operator(constraintParser.Cmp_operatorContext ctx) { return visitChildren(ctx); }
@@ -61,6 +63,8 @@ public class constraintBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	@Override public T visitPath__w(constraintParser.Path__wContext ctx) { return visitChildren(ctx); }
 
 	@Override public T visitAssert_and(constraintParser.Assert_andContext ctx) { return visitChildren(ctx); }
+
+	@Override public T visitAssert_list_(constraintParser.Assert_list_Context ctx) { return visitChildren(ctx); }
 
 	@Override public T visitVar_perm(constraintParser.Var_permContext ctx) { return visitChildren(ctx); }
 
@@ -146,9 +150,9 @@ public class constraintBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 
 	@Override public T visitSw_idx(constraintParser.Sw_idxContext ctx) { return visitChildren(ctx); }
 
-	@Override public T visitMax_priority_(constraintParser.Max_priority_Context ctx) { return visitChildren(ctx); }
-
 	@Override public T visitIp_format(constraintParser.Ip_formatContext ctx) { return visitChildren(ctx); }
+
+	@Override public T visitMax_priority_(constraintParser.Max_priority_Context ctx) { return visitChildren(ctx); }
 
 	@Override public T visitTopo_(constraintParser.Topo_Context ctx) { return visitChildren(ctx); }
 
@@ -165,8 +169,6 @@ public class constraintBaseVisitor<T> extends AbstractParseTreeVisitor<T> implem
 	@Override public T visitAction_(constraintParser.Action_Context ctx) { return visitChildren(ctx); }
 
 	@Override public T visitSw_idx_list__w(constraintParser.Sw_idx_list__wContext ctx) { return visitChildren(ctx); }
-
-	@Override public T visitStat(constraintParser.StatContext ctx) { return visitChildren(ctx); }
 
 	@Override public T visitOthers_flows_(constraintParser.Others_flows_Context ctx) { return visitChildren(ctx); }
 
