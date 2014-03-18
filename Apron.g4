@@ -32,12 +32,15 @@ filter_not_factor:
     |max_priority                           #MaxPriority
     |flow_table                             #FlowTable
     |notification                           #NotificationS
-    |statistics                             #StatisticS
+    |statistics                             #StatisticsS
+    |pkt_out                                #PktOut
+    |system                                 #SystemS
     ;    
 flow_predicate:
-              ip_range                      #IpRange
-              |field '{' value_list'}'      #FieldList
-              ;
+    field val                               #FieldVal
+    |field val MASK val                     #FieldMask
+    |WILDCARD field val                     #Wildcard
+    ;
 field:
      TCP_SRC
      |TCP_DST
@@ -45,20 +48,10 @@ field:
      |IP_SRC
      |IP_DST
      ;
-value_list:
-          value_range                       #ValueListS
-          |value_range ',' value_list       #ValueListM
-          ;
-value_range:
-           INT                              #ValueRangeS
-           |INT '-' INT                     #ValueRangeM
-           ;
-ip_range:
-        IP ip_format WITH MASK ip_format    
-        ;
-ip_format:
-         IP_FORMAT
-         ;
+val:
+    INT                                     #ValInt
+    |IP_FORMAT                              #ValIp
+    ;
 topo:
     physical_topo                           #PhysicalTopo
     |virtual_topo                           #VirtualTopo
@@ -88,7 +81,7 @@ link_list:
          |link ',' link_list                #LinkListM
          ;
 link:
-    link_idx                                #LinkS
+    link_idx ':' link_idx ';'               #LinkS
     |'(' path ')'                           #LinkM
     ;
 path:
@@ -96,8 +89,8 @@ path:
     |link_idx ':' path                      #PathM
     ;
 link_idx:
-        INT
-        ;
+    sw_idx ',' INT
+    ;
 virtual_topo:
             VIRTUAL SWITCH switch_mapping AND LINK link_set
             ;
@@ -113,10 +106,10 @@ action:
       DROP                                  #Drop
       |FORWARD                              #Forward
       |MODIFY                               #Modify
-      |MODIFY FIELD field_list              #Modify_field
+      |MODIFY FIELD field_list              #ModifyField
       ;
 field_list:
-          field                             #FiledS
+          field                             #FieldS
           |field ',' field_list             #FieldM
           ;    
 ownership:
@@ -125,7 +118,8 @@ ownership:
          |ALL_FLOWS                         #AllFlows
          ;
 max_priority:
-            MAX_PRIORITY INT
+            MAX_PRIORITY INT                #PriorityMax
+            |MIN_PRIORITY INT               #PriorityMin
             ;
 flow_table:
     RULE_COUNT_PER_SWITCH INT               #FlowTableA
@@ -140,6 +134,18 @@ statistics:
           |PORT_LEVEL                       #PortLevel
           |SWITCH_LEVEL                     #SwitchLevel
           ;
+pkt_out:
+        FROM_PKT_IN                         #PktOutDeny
+        |ARBITRARY                          #PktOutAllow
+        ;
 perm_name:
          STRING
          ;
+system:
+        AllowNetworkAccess                  #NetworkAllow
+        |DenyNetworkAccess                  #NetworkDeny
+        |AllowFileSystem                    #FileAllow
+        |DenyFileSystem                     #FileDeny
+        |AllowProcessRuntime                #ProcessAllow
+        |DenyProcessRuntime                 #ProcessDeny
+        ;

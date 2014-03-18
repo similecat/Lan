@@ -11,11 +11,11 @@ public class Test{
         InputStream is = System.in;
         if ( inputFile!=null ) is = new FileInputStream(inputFile);
         ANTLRInputStream input = new ANTLRInputStream(is);
-        apronLexer lexer = new apronLexer(input);
+        ApronLexer lexer = new ApronLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
-        apronParser parser = new apronParser(tokens);
+        ApronParser parser = new ApronParser(tokens);
         ParseTree tree = parser.program(); // parse
-
+/*
         EvalVisitor eval = new EvalVisitor();
         eval.perm_req.setapp("pkt_in_event");
         //eval.visit(tree);
@@ -27,5 +27,6 @@ public class Test{
         else{
             System.out.println("False");
         }
+*/
     }
 }
