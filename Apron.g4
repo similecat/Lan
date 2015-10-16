@@ -40,14 +40,65 @@ flow_predicate:
     field val                               #FieldVal
     |field val MASK val                     #FieldMask
     |WILDCARD field val                     #Wildcard
+    |MACFields mac                          #MacFieldPre
+    |INTFields INT                          #IntFieldPre
     ;
+
+
 field:
-     TCP_SRC
-     |TCP_DST
-     |VLAN_ID
-     |IP_SRC
-     |IP_DST
-     ;
+    TCP_SRC
+    |TCP_DST
+    |VLAN_ID
+    |IP_SRC
+    |IP_DST
+    |ARPIPfield
+    ;
+
+MACFields:
+    ETHField
+    |ARPMACfield
+    ;
+INTFields:
+    ICMPfield
+    |SCTPfield
+    |UDPfield
+    |OtherIntField
+    ;
+ETHField:
+    ETH_SRC
+    |ETH_DST
+    ;
+ARPIPfield:
+    ARP_OP
+    |ARP_IP_SRC
+    |ARP_IP_DST
+    ;
+ARPMACfield:
+    ARP_MAC_SRC
+    |ARP_MAC_DST
+    ;
+ICMPfield:
+    ICMP_TYPE
+    |ICMP_CODE
+    ;
+SCTPfield:
+    SCTP_SRC
+    |SCTP_DST
+    ;
+UDPfield:
+    UDP_SRC
+    |UDP_DST
+    ;
+OtherIntField:
+    IN_PORT
+    |PHY_PORT
+    |ETH_TYPE
+    |IP_PROTO
+    ;
+mac:
+    NUM16 ':' NUM16 ':' NUM16 ':' NUM16 ':' NUM16 ':' NUM16 #MacVal
+    ;
+
 val:
     INT                                     #ValInt
     |IP_FORMAT                              #ValIp
@@ -103,15 +154,38 @@ virtual_switch_set:
           |switch_set AS sw_idx ',' virtual_switch_set  #VirtualSwitchSetM
           ;
 action:
-      DROP                                  #Drop
-      |FORWARD                              #Forward
-      |MODIFY                               #Modify
-      |MODIFY FIELD field_list              #ModifyField
-      ;
+    DROP                                    #Drop
+    |FORWARD                                #Forward
+    |MODIFY                                 #Modify
+    |MODIFY FIELD field_list                #ModifyField
+    |OperateAction                          #ActionOp
+    ;
+OperateAction:
+    COPY_TTL_OUT
+    |COPY_TTL_IN
+    |SET_MPLS_TTL
+    |DEC_MPLS_TTL
+    |PUSH_MPLS
+    |POP_MPLS
+    |PUSH_VLAN
+    |POP_VLAN
+    |SET_QUEUE
+    |GROUP
+    |SET_NW_TTL
+    |DEC_NW_TTL
+    |PUSH_PBB
+    |POP_PBB
+    |EXPERIMENTER
+    ;
 field_list:
-          field                             #FieldS
-          |field ',' field_list             #FieldM
-          ;    
+    field                                   #FieldS1
+    |MACFields                              #FieldS2
+    |INTFields                              #FieldS3
+    |field ',' field_list                   #FieldM1
+    |MACFields ',' field_list               #FieldM2
+    |INTFields ',' field_list               #FieldM3
+    ;    
+
 ownership:
          OWN_FLOWS                          #OwnFlows
          |OTHERS_FLOWS                      #OthersFlows

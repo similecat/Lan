@@ -9,9 +9,11 @@ test:compile
 tree:run
 
 gui:compile
+	export CLASSPATH=".:/usr/local/lib/antlr-4.0-complete.jar:$(CLASSPATH)"
 	$(grun) $(Program) $(init) -gui <sample.txt
 
 run:compile
+	export CLASSPATH=".:/usr/local/lib/antlr-4.0-complete.jar:$(CLASSPATH)"
 	$(grun) $(Program) $(init) -tree <sample.txt
 compile:generate
 	javac *.java
